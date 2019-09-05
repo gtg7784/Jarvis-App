@@ -60,23 +60,7 @@ class SettingScreen extends React.Component {
             }}>
             프로필
           </Text>
-          <TouchableOpacity
-            style={{
-              width: 30,
-              height: 30,
-              borderColor: COLOR_BLACK,
-              borderRadius: 20,
-              borderWidth: 1,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
-            <Text
-              style={{
-                fontSize: 18,
-              }}>
-              T
-            </Text>
-          </TouchableOpacity>
+          <View />
         </View>
         <View
           style={{

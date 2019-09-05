@@ -74,24 +74,7 @@ class HomeScreen extends React.Component {
             }}>
             오늘날씨 {weather}°C
           </Text>
-
-          <TouchableOpacity
-            style={{
-              width: 30,
-              height: 30,
-              borderColor: COLOR_BLACK,
-              borderRadius: 20,
-              borderWidth: 1,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
-            <Text
-              style={{
-                fontSize: 18,
-              }}>
-              T
-            </Text>
-          </TouchableOpacity>
+          <View />
         </View>
         <View
           style={{
