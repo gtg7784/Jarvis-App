@@ -8,7 +8,7 @@
 
 import React, {Fragment, Component} from 'react';
 import {Provider} from 'mobx-react';
-import {Platform} from 'react-native';
+import {Platform, Image} from 'react-native';
 import {
   NavigationScreenOptions,
   NavigationScreenProp,
@@ -17,7 +17,6 @@ import {
 } from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import HomeScreen from './src/screens/HomeScreen';
 import MapScreen from './src/screens/MapScreen';
@@ -25,8 +24,12 @@ import SettingScreen from './src/screens/SettingScreen';
 
 import stores from './src/stores';
 
-import {COLOR_MAIN} from './src/constants/color';
-import {IMAGE_HOME} from './src/constants/image';
+import {
+  COLOR_BLACK,
+  COLOR_WHITE,
+  COLOR_TRANS_BLACK,
+} from './src/constants/color';
+import {IMAGE_HOME, IMAGE_MAP, IMAGE_SETTINGS} from './src/constants/image';
 
 class App extends Component {
   componentDidMount = async () => {
@@ -82,7 +85,7 @@ const HomeStack = createStackNavigator(
     Home: {
       screen: HomeScreen,
       tabBarOptions: {
-        activeTintColor: COLOR_MAIN,
+        activeTintColor: COLOR_BLACK,
         labelStyle: {
           fontSize: 12,
         },
@@ -106,7 +109,9 @@ const HomeStack = createStackNavigator(
 
 const MapStack = createStackNavigator(
   {
-    Map: {screen: MapScreen},
+    Map: {
+      screen: MapScreen,
+    },
   },
   {
     defaultNavigationOptions: {
@@ -125,7 +130,16 @@ const MapStack = createStackNavigator(
 
 const SettingStack = createStackNavigator(
   {
-    Firend: {screen: SettingScreen},
+    Firend: {
+      screen: SettingScreen,
+      tabBarOptions: {
+        activeTintColor: COLOR_BLACK,
+        labelStyle: {
+          fontSize: 12,
+        },
+        showIcon: true,
+      },
+    },
   },
   {
     defaultNavigationOptions: {
@@ -142,11 +156,50 @@ const SettingStack = createStackNavigator(
   },
 );
 
-const MainSwitch = createBottomTabNavigator({
-  Home: HomeStack,
-  Map: MapStack,
-  Setting: SettingStack,
-});
+const MainSwitch = createBottomTabNavigator(
+  {
+    Home: HomeStack,
+    Map: MapStack,
+    Setting: SettingStack,
+  },
+  {
+    defaultNavigationOptions: ({navigation}) => ({
+      tabBarIcon: ({focused, horizontal, tintColor}) => {
+        const {routeName} = navigation.state;
+        let iconName;
+        if (routeName === 'Home') {
+          iconName = IMAGE_HOME;
+        } else if (routeName === 'Map') {
+          iconName = IMAGE_MAP;
+        } else if (routeName === 'Setting') {
+          iconName = IMAGE_SETTINGS;
+        }
+
+        return (
+          <Image
+            source={iconName}
+            style={{
+              marginTop: 10,
+              width: 25,
+              height: 25,
+              marginBottom: 5,
+            }}
+          />
+        );
+      },
+    }),
+    tabBarOptions: {
+      activeTintColor: COLOR_BLACK,
+      inactiveTintColor: COLOR_TRANS_BLACK,
+      labelStyle: {
+        fontSize: 12,
+      },
+      style: {
+        backgroundColor: COLOR_WHITE,
+      },
+    },
+  },
+);
 const AppContainer = createAppContainer(MainSwitch);
 
 export default App;
