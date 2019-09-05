@@ -445,7 +445,7 @@ class HomeScreen extends React.Component {
             justifyContent: 'center',
             alignItems: 'center',
             backgroundColor: COLOR_BLACK,
-            borderRadius: 16,
+            borderRadius: 10,
           }}>
           <Text
             style={{
